@@ -45,6 +45,8 @@ class UserProfileUpdateView(SuccessMessageMixin,UpdateView):
         if self.object.user != request.user:
             return HttpResponseRedirect('/')
         return super(UserProfileUpdateView, self).get(request,*args,*kwargs)
+
+@method_decorator(login_required(login_url='/users/login'),name="dispatch")
 class UserProfileView(ListView):
     template_name = 'users/my-profile.html'
     model = Post
@@ -54,5 +56,19 @@ class UserProfileView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data(**kwargs)
-        context('userprofile') =UserProfile
+        context['userprofile'] =UserProfile.objects.get(user=self.request.user)
+        return  context
+
+    def get_queryset(self):
+        return Post.objects.filter(user=self.request.user).order_by('-id')
+
+class UserPostView(ListView):
+    template_name = 'users/user-post.html'
+    model = Post
+    context_object_name = 'posts'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Post.objects.filter(user=self.kwargs['pk'])
+
 
