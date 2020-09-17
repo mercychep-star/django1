@@ -1,4 +1,5 @@
 {% load static%}
+{% load custom_tags %}
 
 <!doctype html>
 <html lang="en">
@@ -24,6 +25,7 @@
     <body>
 <!--================Header Menu Area =================-->
         <header class="header_area">
+            {% include 'messages.html' %}
             <div class="logo_part">
             	<div class="container">
             		<a class="logo" href="{% url 'index' %}"><img src="{% static "img/logo.png" %}" alt=""></a>
@@ -43,8 +45,16 @@
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav">
 								<li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">ELDORET MY Home</a></li>
-								<li class="nav-item"><a class="nav-link" href="category.html">FIND US(CATEGORY)</a></li>
-								<li class="nav-item"><a class="nav-link" href="archive.html">Archive</a></li>
+                                <li class="nav-item submenu dropdown">
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">category</a>
+									<ul class="dropdown-menu"
+                                        {% categories as categories%}
+                                        {% for category in categories%}
+								<li class="nav-item"><a class="nav-link" href="{% url 'category_detail' pk=category.id slug=category.slug %}"">{{ category.title }}</a></li>
+                                {% endfor %}
+                                </ul>
+								</li>
+								<li class="nav-item"><a class="nav-link" href="{% url 'users:user_list' %}">USERS</a></li>
                                 {% if user.is_authenticated%}
 								<li class="nav-item submenu dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}}</a>
