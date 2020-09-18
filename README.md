@@ -6,7 +6,7 @@ https://www.udemy.com/course/django-30-masterclass-learn-how-to-create-django-ap
 This is the first practice project from udemy django masterclass course. i changed the name of the  project slightly from Fantom to Fanton.
 the design and the flow of the project, however remains the same.
 
-#Getting started
+# Getting started
 Ensure that the following are installed and updated in your system:
 * python (latest version) 
 * Django, version 3
