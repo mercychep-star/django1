@@ -16,6 +16,14 @@ Ensure that the following are installed and updated in your system:
 # Prerequisites
 Basic knowledge on Python programming language
 
+#deployment
+* open a free account on python everywhere website.
+* zip your projects files.
+* sep up your live enviriment by using bash cmd in the website
+* upload the zipped file to your account, then unzip it.
+* run the project using the url provided by the website
+NB: since the account is free, you will not be able to choose your own url.
+
 
 
 # What is included in the project
